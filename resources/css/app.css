@@ -1,1 +1,161 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
+
+
+
+body{
+    background:#f5f7fb;
+    font-family: "Segoe UI", sans-serif;
+    color:#222;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+
+.search-box{
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+
+
+.input-group-lg .form-control{
+    border-radius:18px 0 0 18px;
+    border:1px solid #dee2e6;
+    padding:15px;
+}
+
+.input-group-lg .btn{
+    border-radius:0 18px 18px 0;
+    padding-left:30px;
+    padding-right:30px;
+}
+
+
+
+.article-card{
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    transition:.30s;
+
+    background:white;
+
+}
+
+.article-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.article-card h4{
+
+    min-height:60px;
+
+}
+
+.article-card .badge{
+
+    font-size:.8rem;
+
+    letter-spacing:.5px;
+
+}
+
+.article-card .btn{
+
+    transition:.25s;
+
+}
+
+.article-card .btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+
+.text-success{
+
+    color:#0d9c50!important;
+
+}
+
+
+
+.alert{
+
+    border-radius:15px;
+
+}
+
+
+
+.pagination{
+
+    justify-content:center;
+
+}
+
+.page-link{
+
+    border-radius:10px!important;
+
+    margin:3px;
+
+}
+
+
+
+.btn-primary{
+
+    border-radius:14px;
+
+    transition:.25s;
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+.empty-card{
+
+    border-radius:20px;
+
+    background:white;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+
+
+@media(max-width:768px){
+
+    .display-4{
+
+        font-size:2rem;
+
+    }
+
+    .search-box{
+
+        padding:20px;
+
+    }
+
+}
