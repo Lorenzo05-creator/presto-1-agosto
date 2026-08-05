@@ -1,21 +1,47 @@
-<div class="card h-100 shadow-sm">
-    <div class="card-body">
-        <h5>{{ $article->title }}</h5>
+<div class="card article-card h-100 border-0 shadow-sm">
 
-        <p class="text-muted">
-            € {{ $article->price }}
-        </p>
+    <div class="card-body d-flex flex-column">
 
-        <p class="small">
-            Categoria:
-            <a href="{{ route('articles.byCategory', $article->category) }}">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <span class="badge bg-primary px-3 py-2">
                 {{ $article->category->name }}
-            </a>
+            </span>
+
+            <small class="text-muted">
+                {{ $article->created_at->format('d/m/Y') }}
+            </small>
+
+        </div>
+
+        <h4 class="fw-bold mb-3">
+            {{ $article->title }}
+        </h4>
+
+        <h3 class="text-success fw-bold mb-3">
+            € {{ number_format($article->price, 2, ',', '.') }}
+        </h3>
+
+        <p class="text-muted flex-grow-1">
+            {{ \Illuminate\Support\Str::limit($article->description, 110) }}
         </p>
 
-        <a href="{{ route('articles.show', $article) }}"
-           class="btn btn-sm btn-primary">
-            Dettaglio
-        </a>
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+            <small class="text-secondary">
+                {{ __('messages.author') }}:
+                {{ $article->user->name }}
+            </small>
+
+            <a href="{{ route('articles.show', $article) }}"
+               class="btn btn-primary rounded-pill px-4">
+
+                {{ __('messages.details') }} →
+
+            </a>
+
+        </div>
+
     </div>
+
 </div>

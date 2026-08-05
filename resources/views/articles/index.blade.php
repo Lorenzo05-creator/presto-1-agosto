@@ -1,25 +1,24 @@
-<x-layout title="Annunci">
+<x-layout :title="__('messages.ads')">
 
 <div class="container py-5">
 
     <div class="text-center mb-5">
 
         <h1 class="display-4 fw-bold">
-             Esplora tutti gli annunci
+            {{ __('messages.explore_ads') }}
         </h1>
 
         <p class="text-muted fs-5">
-            Cerca rapidamente ciò che ti interessa per
-            <strong>titolo</strong>,
-            <strong>descrizione</strong>
-            oppure
-            <strong>categoria</strong>.
+            {{ __('messages.search_description') }}
+            <strong>{{ __('messages.title') }}</strong>,
+            <strong>{{ __('messages.description') }}</strong>
+            {{ __('messages.or') }}
+            <strong>{{ __('messages.category') }}</strong>.
         </p>
 
     </div>
 
-
-   <div class="search-box mb-5">
+    <div class="search-box mb-5">
 
         <div class="card-body p-4">
 
@@ -31,13 +30,13 @@
                         type="text"
                         class="form-control"
                         name="search"
-                        placeholder="🔎 Cerca un annuncio..."
+                        placeholder="🔎 {{ __('messages.search_placeholder') }}"
                         value="{{ request('search') }}"
                     >
 
                     <button class="btn btn-primary px-4">
 
-                        Cerca
+                        {{ __('messages.search') }}
 
                     </button>
 
@@ -49,13 +48,11 @@
 
     </div>
 
-
-
     @if(request('search'))
 
         <div class="alert alert-primary shadow-sm rounded-3">
 
-            <strong>Ricerca:</strong>
+            <strong>{{ __('messages.search') }}:</strong>
 
             "{{ request('search') }}"
 
@@ -63,14 +60,11 @@
 
             <strong>{{ $articles->total() }}</strong>
 
-            risultati trovati.
+            {{ __('messages.results_found') }}
 
         </div>
 
     @endif
-
-
-
 
     @if($articles->count())
 
@@ -99,20 +93,18 @@
         <div class="card border-0 shadow text-center p-5 rounded-4">
 
             <h2 class="display-6">
-
                 😕
-
             </h2>
 
             <h3 class="fw-bold">
 
-                Nessun annuncio trovato
+                {{ __('messages.no_results') }}
 
             </h3>
 
             <p class="text-muted">
 
-                Prova a cambiare le parole della tua ricerca.
+                {{ __('messages.try_other_search') }}
 
             </p>
 
@@ -121,7 +113,7 @@
                 class="btn btn-outline-primary mt-3"
             >
 
-                Mostra tutti gli annunci
+                {{ __('messages.all_ads') }}
 
             </a>
 
