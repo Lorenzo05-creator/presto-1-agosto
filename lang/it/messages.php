@@ -66,5 +66,7 @@ return [
 'images' => 'Immagini',
 'choose_images' => 'Scegli immagini',
 'selected_images' => 'immagini selezionate',
+'ads_in_category' => 'Annunci nella categoria',
+'no_ads_category' => 'Nessun annuncio in questa categoria.',
 
 ];

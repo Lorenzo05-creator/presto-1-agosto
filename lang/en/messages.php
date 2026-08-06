@@ -67,4 +67,6 @@ return [
 'images' => 'Images',
 'choose_images' => 'Choose images',
 'selected_images' => 'selected images',
+'ads_in_category' => 'Ads in category',
+'no_ads_category' => 'No ads in this category.',
 ];

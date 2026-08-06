@@ -1,20 +1,28 @@
-<x-layout title="Categoria {{ $category->name }}">
+<x-layout :title="__('messages.category') . ' ' . __('messages.'.$category->name)">
+
     <div class="container">
 
         <h1 class="mb-4">
-            Annunci in categoria: {{ $category->name }}
+            {{ __('messages.ads_in_category') }}:
+            {{ __('messages.'.$category->name) }}
         </h1>
 
         <div class="row">
+
             @forelse($articles as $article)
+
                 <div class="col-md-4 mb-3">
                     <x-card :article="$article" />
                 </div>
+
             @empty
-                <p>Nessun annuncio in questa categoria.</p>
+
+                <p>{{ __('messages.no_ads_category') }}</p>
+
             @endforelse
+
         </div>
 
     </div>
-</x-layout>
 
+</x-layout>
