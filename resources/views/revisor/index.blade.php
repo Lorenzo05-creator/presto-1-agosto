@@ -1,36 +1,103 @@
-<x-layout title="Dashboard Revisore">
-    <div class="container">
+<x-layout :title="__('messages.revisor_area')">
+
+    <div class="container py-5">
 
         @if($article_to_check)
 
-            <h2>{{ $article_to_check->title }}</h2>
+            <h2 class="mb-4">
+                {{ $article_to_check->title }}
+            </h2>
 
-            <div class="row my-3">
-                @for($i = 0; $i < 6; $i++)
-                    <div class="col-md-4 mb-2">
-                        <img src="https://via.placeholder.com/300x200" class="img-fluid">
+            <div class="row mb-4">
+
+                @forelse($article_to_check->images as $image)
+
+                    <div class="col-md-4 mb-3">
+
+                        <img
+                            src="{{ asset('storage/'.$image->path) }}"
+                            class="img-fluid rounded shadow"
+                            style="height:250px; width:100%; object-fit:cover;"
+                            alt="{{ $article_to_check->title }}">
+
                     </div>
-                @endfor
+
+                @empty
+
+                    <div class="col-12">
+
+                        <img
+                            src="https://picsum.photos/800/400"
+                            class="img-fluid rounded">
+
+                    </div>
+
+                @endforelse
+
             </div>
 
-            <p>{{ $article_to_check->description }}</p>
+            <p class="fs-5">
 
-            <form method="POST" action="{{ route('revisor.accept', $article_to_check) }}">
-                @csrf
-                @method('PATCH')
-                <button class="btn btn-success">Accetta</button>
-            </form>
+                {{ $article_to_check->description }}
 
-            <form method="POST" action="{{ route('revisor.reject', $article_to_check) }}" class="mt-2">
-                @csrf
-                @method('PATCH')
-                <button class="btn btn-danger">Rifiuta</button>
-            </form>
+            </p>
+
+            <div class="d-flex gap-2">
+
+                <form
+                    method="POST"
+                    action="{{ route('revisor.accept', $article_to_check) }}">
+
+                    @csrf
+                    @method('PATCH')
+
+                    <button class="btn btn-success">
+
+                        {{ __('messages.accept') }}
+
+                    </button>
+
+                </form>
+
+                <form
+                    method="POST"
+                    action="{{ route('revisor.reject', $article_to_check) }}">
+
+                    @csrf
+                    @method('PATCH')
+
+                    <button class="btn btn-danger">
+
+                        {{ __('messages.reject') }}
+
+                    </button>
+
+                </form>
+
+            </div>
 
         @else
-            <p>Nessun articolo da revisionare</p>
-            <a href="/" class="btn btn-primary">Torna alla home</a>
+
+            <div class="text-center">
+
+                <h3>
+
+                    {{ __('messages.no_articles_review') }}
+
+                </h3>
+
+                <a
+                    href="{{ route('home') }}"
+                    class="btn btn-primary mt-3">
+
+                    {{ __('messages.back_home') }}
+
+                </a>
+
+            </div>
+
         @endif
 
     </div>
+
 </x-layout>

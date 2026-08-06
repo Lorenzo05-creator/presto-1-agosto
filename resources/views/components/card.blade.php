@@ -3,7 +3,7 @@
     @if($article->images->count())
 
         <img
-            src="{{ Storage::url($article->images->first()->path) }}"
+            src="{{ asset('storage/'.$article->images->first()->path) }}"
             class="card-img-top"
             style="height:220px; object-fit:cover;"
             alt="{{ $article->title }}">
@@ -23,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
 
             <span class="badge bg-primary px-3 py-2">
-                {{ $article->category->name }}
+                {{ __('messages.'.$article->category->name) }}
             </span>
 
             <small class="text-muted">

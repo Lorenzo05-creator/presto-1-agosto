@@ -76,13 +76,13 @@
                 {{ __('messages.select_category') }}
             </option>
 
-            @foreach($categories as $category)
+           @foreach($categories as $category)
 
-                <option value="{{ $category->id }}">
-                    {{ $category->name }}
-                </option>
+    <option value="{{ $category->id }}">
+        {{ __('messages.'.$category->name) }}
+    </option>
 
-            @endforeach
+@endforeach
 
         </select>
 
@@ -92,29 +92,40 @@
 
     </div>
 
-    {{-- Upload immagini --}}
-    <div class="mb-4">
+   {{-- Upload immagini --}}
+<div class="mb-4">
 
-        <label class="form-label fw-bold">
+    <label class="form-label fw-bold">
+        {{ __('messages.images') }}
+    </label>
 
-            Immagini
+    <input
+        id="images"
+        type="file"
+        wire:model.live="temporary_images"
+        multiple
+        hidden>
 
-        </label>
+    <label
+        for="images"
+        class="btn btn-outline-primary w-100">
 
-        <input
-            wire:model.live="temporary_images"
-            type="file"
-            multiple
-            class="form-control">
+        {{ __('messages.choose_images') }}
 
-<p>Temporary: {{ count($temporary_images) }}</p>
-<p>Images: {{ count($images) }}</p>
+    </label>
 
-        @error('temporary_images.*')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
+    <small class="text-muted d-block mt-2">
+        {{ count($images) }}
+        {{ __('messages.selected_images') }}
+    </small>
 
-    </div>
+    @error('temporary_images.*')
+        <small class="text-danger">
+            {{ $message }}
+        </small>
+    @enderror
+
+</div>
 
     {{-- Anteprima --}}
     @if(count($images))

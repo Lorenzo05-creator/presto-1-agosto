@@ -47,7 +47,7 @@
                             <li>
                                 <a class="dropdown-item"
                                    href="{{ route('articles.byCategory', $category) }}">
-                                    {{ $category->name }}
+                                    {{ __('messages.'.$category->name) }}
                                 </a>
                             </li>
 

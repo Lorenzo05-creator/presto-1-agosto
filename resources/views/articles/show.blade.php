@@ -81,7 +81,7 @@
 
             <a href="{{ route('articles.byCategory', $article->category) }}">
 
-                {{ $article->category->name }}
+                {{ __('messages.'.$article->category->name) }}
 
             </a>
 
