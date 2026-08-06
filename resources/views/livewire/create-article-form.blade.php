@@ -1,4 +1,4 @@
-<form wire:submit="store" class="col-md-6">
+<form wire:submit="store" class="col-md-8 mx-auto">
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -6,9 +6,12 @@
         </div>
     @endif
 
+    {{-- Titolo --}}
     <div class="mb-3">
 
-        <label>{{ __('messages.title') }}</label>
+        <label class="form-label">
+            {{ __('messages.title') }}
+        </label>
 
         <input
             wire:model="title"
@@ -21,14 +24,17 @@
 
     </div>
 
+    {{-- Descrizione --}}
     <div class="mb-3">
 
-        <label>{{ __('messages.description') }}</label>
+        <label class="form-label">
+            {{ __('messages.description') }}
+        </label>
 
         <textarea
             wire:model="description"
-            class="form-control"
-            rows="5"></textarea>
+            rows="5"
+            class="form-control"></textarea>
 
         @error('description')
             <small class="text-danger">{{ $message }}</small>
@@ -36,9 +42,12 @@
 
     </div>
 
+    {{-- Prezzo --}}
     <div class="mb-3">
 
-        <label>{{ __('messages.price') }}</label>
+        <label class="form-label">
+            {{ __('messages.price') }}
+        </label>
 
         <input
             wire:model="price"
@@ -52,13 +61,16 @@
 
     </div>
 
-    <div class="mb-3">
+    {{-- Categoria --}}
+    <div class="mb-4">
 
-        <label>{{ __('messages.category') }}</label>
+        <label class="form-label">
+            {{ __('messages.category') }}
+        </label>
 
         <select
             wire:model="category_id"
-            class="form-control">
+            class="form-select">
 
             <option value="">
                 {{ __('messages.select_category') }}
@@ -80,9 +92,72 @@
 
     </div>
 
+    {{-- Upload immagini --}}
+    <div class="mb-4">
+
+        <label class="form-label fw-bold">
+
+            Immagini
+
+        </label>
+
+        <input
+            wire:model.live="temporary_images"
+            type="file"
+            multiple
+            class="form-control">
+
+<p>Temporary: {{ count($temporary_images) }}</p>
+<p>Images: {{ count($images) }}</p>
+
+        @error('temporary_images.*')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+
+    </div>
+
+    {{-- Anteprima --}}
+    @if(count($images))
+
+        <div class="row mb-4">
+
+            @foreach($images as $key => $image)
+
+                <div class="col-md-3 mb-3">
+
+                    <div class="card shadow-sm">
+
+                        <img
+                            src="{{ $image->temporaryUrl() }}"
+                            class="card-img-top"
+                            style="height:200px; object-fit:cover;">
+
+                        <div class="card-body text-center">
+
+                            <button
+                                type="button"
+                                wire:click="removeImage({{ $key }})"
+                                class="btn btn-danger btn-sm">
+
+                                Elimina
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+    @endif
+
     <button
         type="submit"
-        class="btn btn-primary">
+        class="btn btn-primary w-100">
 
         {{ __('messages.new_article') }}
 

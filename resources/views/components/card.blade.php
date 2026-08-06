@@ -1,5 +1,23 @@
 <div class="card article-card h-100 border-0 shadow-sm">
 
+    @if($article->images->count())
+
+        <img
+            src="{{ Storage::url($article->images->first()->path) }}"
+            class="card-img-top"
+            style="height:220px; object-fit:cover;"
+            alt="{{ $article->title }}">
+
+    @else
+
+        <img
+            src="https://picsum.photos/600/400"
+            class="card-img-top"
+            style="height:220px; object-fit:cover;"
+            alt="Placeholder">
+
+    @endif
+
     <div class="card-body d-flex flex-column">
 
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -33,8 +51,9 @@
                 {{ $article->user->name }}
             </small>
 
-            <a href="{{ route('articles.show', $article) }}"
-               class="btn btn-primary rounded-pill px-4">
+            <a
+                href="{{ route('articles.show', $article) }}"
+                class="btn btn-primary rounded-pill px-4">
 
                 {{ __('messages.details') }} →
 

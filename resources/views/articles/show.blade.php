@@ -6,26 +6,60 @@
             {{ $article->title }}
         </h1>
 
-        <div id="carouselExample" class="carousel slide mb-4">
+        @if($article->images->count())
 
-            <div class="carousel-inner">
+            <div id="carouselExample" class="carousel slide mb-5">
 
-                @for($i = 0; $i < 3; $i++)
+                <div class="carousel-inner">
 
-                    <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
+                    @foreach($article->images as $key => $image)
 
-                        <img
-                            src="https://via.placeholder.com/800x400"
-                            class="d-block w-100"
-                            alt="Article image">
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
 
-                    </div>
+                            <img
+                                src="{{ asset('storage/'.$image->path) }}"
+                                class="d-block w-100 rounded"
+                                style="height:500px; object-fit:cover;"
+                                alt="{{ $article->title }}">
 
-                @endfor
+                        </div>
+
+                    @endforeach
+
+                </div>
+
+                @if($article->images->count() > 1)
+
+                    <button class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselExample"
+                            data-bs-slide="prev">
+
+                        <span class="carousel-control-prev-icon"></span>
+
+                    </button>
+
+                    <button class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselExample"
+                            data-bs-slide="next">
+
+                        <span class="carousel-control-next-icon"></span>
+
+                    </button>
+
+                @endif
 
             </div>
 
-        </div>
+        @else
+
+            <img
+                src="https://picsum.photos/1200/500"
+                class="img-fluid rounded mb-5"
+                alt="Placeholder">
+
+        @endif
 
         <p class="fs-5">
 

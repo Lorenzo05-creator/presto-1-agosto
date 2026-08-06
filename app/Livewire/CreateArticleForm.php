@@ -2,56 +2,94 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateArticleForm extends Component
 {
+    use WithFileUploads;
+
     public $categories;
 
+    public $temporary_images = [];
+
+    public $images = [];
+
     #[Validate('required|min:3')]
-    public $title;
+    public $title = '';
 
     #[Validate('required|min:10')]
-    public $description;
+    public $description = '';
 
-    #[Validate('required|numeric')]
-    public $price;
+    #[Validate('required|numeric|min:0')]
+    public $price = '';
 
-    #[Validate('required')]
-    public $category_id;
+    #[Validate('required|exists:categories,id')]
+    public $category_id = '';
 
     public function mount()
     {
         $this->categories = Category::orderBy('name')->get();
     }
 
+    public function updatedTemporaryImages()
+    {
+        $this->validate([
+            'temporary_images.*' => 'image|max:2048',
+        ]);
+
+        foreach ($this->temporary_images as $image) {
+
+            $this->images[] = $image;
+
+        }
+    }
+
+    public function removeImage($key)
+    {
+        unset($this->images[$key]);
+
+        $this->images = array_values($this->images);
+    }
+
     public function store()
     {
         $this->validate();
 
-        Article::create([
+        $article = Article::create([
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
             'category_id' => $this->category_id,
             'user_id' => Auth::id(),
+            'is_accepted' => null,
         ]);
 
+        if (count($this->images)) {
 
-        $this->reset([
-            'title',
-            'description',
-            'price',
-            'category_id',
-        ]);
+            foreach ($this->images as $image) {
 
-        return redirect()->route('articles.index')
-    ->with('success', 'Annuncio inserito correttamente!');
+                $path = $image->store('articles', 'public');
 
+                Image::create([
+                    'path' => $path,
+                    'article_id' => $article->id,
+                ]);
+
+            }
+
+        }
+
+        session()->flash('success', 'Annuncio inserito correttamente!');
+
+        $this->reset();
+
+        return redirect()->route('articles.index');
     }
 
     public function render()

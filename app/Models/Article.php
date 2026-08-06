@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
@@ -15,18 +17,20 @@ class Article extends Model
         'is_accepted',
     ];
 
-
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
- 
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
+    }
 
     public function setAccepted(?bool $value): void
     {
@@ -34,13 +38,10 @@ class Article extends Model
         $this->save();
     }
 
-
-
     public function scopeAccepted($query)
     {
         return $query->where('is_accepted', true);
     }
-
 
     public static function toBeRevisedCount(): int
     {
