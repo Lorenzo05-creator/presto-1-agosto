@@ -15,7 +15,7 @@
                     <div class="col-md-4 mb-3">
 
                         <img
-                            src="{{ asset('storage/'.$image->path) }}"
+                            src="{{ $image->getUrl(300,300) }}"
                             class="img-fluid rounded shadow"
                             style="height:250px; width:100%; object-fit:cover;"
                             alt="{{ $article_to_check->title }}">
@@ -28,7 +28,8 @@
 
                         <img
                             src="https://picsum.photos/800/400"
-                            class="img-fluid rounded">
+                            class="img-fluid rounded"
+                            alt="Placeholder">
 
                     </div>
 

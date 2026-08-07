@@ -3,7 +3,7 @@
     @if($article->images->count())
 
         <img
-            src="{{ asset('storage/'.$article->images->first()->path) }}"
+            src="{{ $article->images->first()->getUrl(300,300) }}"
             class="card-img-top"
             style="height:220px; object-fit:cover;"
             alt="{{ $article->title }}">

@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Jobs\ResizeImage;
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Support\Facades\File;
 use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
@@ -44,9 +46,7 @@ class CreateArticleForm extends Component
         ]);
 
         foreach ($this->temporary_images as $image) {
-
             $this->images[] = $image;
-
         }
     }
 
@@ -74,15 +74,16 @@ class CreateArticleForm extends Component
 
             foreach ($this->images as $image) {
 
-                $path = $image->store('articles', 'public');
+                $newFileName = "articles/{$article->id}";
 
-                Image::create([
-                    'path' => $path,
-                    'article_id' => $article->id,
+                $newImage = $article->images()->create([
+                    'path' => $image->store($newFileName, 'public'),
                 ]);
 
+                dispatch(new ResizeImage($newImage->path, 300, 300));
             }
 
+            File::deleteDirectory(storage_path('/app/livewire-tmp'));
         }
 
         session()->flash('success', 'Annuncio inserito correttamente!');
