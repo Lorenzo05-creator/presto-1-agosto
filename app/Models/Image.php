@@ -13,6 +13,10 @@ class Image extends Model
         'article_id',
     ];
 
+    protected $casts = [
+        'labels' => 'array',
+    ];
+
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class);

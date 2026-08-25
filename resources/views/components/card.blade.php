@@ -1,9 +1,9 @@
-<div class="card article-card h-100 border-0 shadow-sm">
+<div class="card h-100 border-0 shadow rounded-4 overflow-hidden">
 
     @if($article->images->count())
 
         <img
-            src="{{ $article->images->first()->getUrl(300,300) }}"
+            src="{{ asset('storage/' . $article->images->first()->path) }}"
             class="card-img-top"
             style="height:220px; object-fit:cover;"
             alt="{{ $article->title }}">

@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Jobs\GoogleVisionLabelImage;
+use App\Jobs\GoogleVisionSafeSearch;
 use App\Jobs\ResizeImage;
 use App\Models\Article;
 use App\Models\Category;
-use Illuminate\Support\Facades\File;
-use App\Models\Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -81,6 +82,10 @@ class CreateArticleForm extends Component
                 ]);
 
                 dispatch(new ResizeImage($newImage->path, 300, 300));
+
+                dispatch(new GoogleVisionSafeSearch($newImage));
+
+                dispatch(new GoogleVisionLabelImage($newImage));
             }
 
             File::deleteDirectory(storage_path('/app/livewire-tmp'));
