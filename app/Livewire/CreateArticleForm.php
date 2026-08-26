@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Jobs\GoogleVisionLabelImage;
 use App\Jobs\GoogleVisionSafeSearch;
+use App\Jobs\RemoveFaces;
 use App\Jobs\ResizeImage;
 use App\Models\Article;
 use App\Models\Category;
@@ -81,17 +82,22 @@ class CreateArticleForm extends Component
                     'path' => $image->store($newFileName, 'public'),
                 ]);
 
-                dispatch(new ResizeImage($newImage->path, 300, 300));
-
-                dispatch(new GoogleVisionSafeSearch($newImage));
-
-                dispatch(new GoogleVisionLabelImage($newImage));
+                ResizeImage::withChain([
+    new GoogleVisionSafeSearch($newImage),
+    new GoogleVisionLabelImage($newImage),
+    new RemoveFaces($newImage),
+])->dispatch($newImage->path, 300, 300);
             }
 
-            File::deleteDirectory(storage_path('/app/livewire-tmp'));
+            File::deleteDirectory(
+                storage_path('/app/livewire-tmp')
+            );
         }
 
-        session()->flash('success', 'Annuncio inserito correttamente!');
+        session()->flash(
+            'success',
+            'Annuncio inserito correttamente!'
+        );
 
         $this->reset();
 

@@ -19,10 +19,17 @@
                             <div class="col-md-4 mb-4">
 
                                 <img
+<<<<<<< HEAD
                                     src="{{ asset('storage/' . $image->path) }}"
                                     class="img-fluid rounded shadow"
                                     style="height:250px; width:100%; object-fit:cover;"
                                     alt="{{ $article_to_check->title }}">
+=======
+    src="{{ asset('storage/' . $image->path) }}"
+    class="img-fluid rounded shadow"
+    style="height:250px; width:100%; object-fit:cover;"
+    alt="{{ $article_to_check->title }}">
+>>>>>>> 014b87e (Implementata censura automatica dei volti user 8)
 
                             </div>
 
