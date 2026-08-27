@@ -185,11 +185,6 @@ class RemoveFaces implements ShouldQueue
                 ]);
 
                 if ($faceImage !== false) {
-                    imagefilter(
-                        $faceImage,
-                        IMG_FILTER_GRAYSCALE
-                    );
-
                     $smallWidth = max(
                         4,
                         (int) ($faceWidth / 12)
@@ -229,22 +224,6 @@ class RemoveFaces implements ShouldQueue
                         $faceHeight,
                         $smallWidth,
                         $smallHeight
-                    );
-
-                    $gray = imagecolorallocate(
-                        $faceImage,
-                        150,
-                        150,
-                        150
-                    );
-
-                    imagefilledrectangle(
-                        $faceImage,
-                        0,
-                        0,
-                        $faceWidth - 1,
-                        $faceHeight - 1,
-                        $gray
                     );
 
                     imagecopy(
