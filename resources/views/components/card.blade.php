@@ -2,19 +2,37 @@
 
     @if($article->images->count())
 
-        <img
-            src="{{ asset('storage/' . $article->images->first()->path) }}"
-            class="card-img-top"
-            style="height:220px; object-fit:cover;"
-            alt="{{ $article->title }}">
+        <div class="position-relative" style="height:220px;">
+
+            <img
+                src="{{ asset('storage/' . $article->images->first()->path) }}"
+                class="card-img-top"
+                style="height:220px; width:100%; object-fit:cover;"
+                alt="{{ $article->title }}">
+
+            <img
+                src="{{ asset('images/presto_watermark.png') }}"
+                alt="PRESTO"
+                style="position:absolute; bottom:10px; right:10px; width:100px; height:auto; z-index:10;">
+
+        </div>
 
     @else
 
-        <img
-            src="https://picsum.photos/600/400"
-            class="card-img-top"
-            style="height:220px; object-fit:cover;"
-            alt="Placeholder">
+        <div class="position-relative" style="height:220px;">
+
+            <img
+                src="https://picsum.photos/600/400"
+                class="card-img-top"
+                style="height:220px; width:100%; object-fit:cover;"
+                alt="Placeholder">
+
+            <img
+                src="{{ asset('images/presto_watermark.png') }}"
+                alt="PRESTO"
+                style="position:absolute; bottom:10px; right:10px; width:100px; height:auto; z-index:10;">
+
+        </div>
 
     @endif
 

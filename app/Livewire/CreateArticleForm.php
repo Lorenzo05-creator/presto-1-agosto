@@ -82,11 +82,11 @@ class CreateArticleForm extends Component
                     'path' => $image->store($newFileName, 'public'),
                 ]);
 
-                ResizeImage::withChain([
-    new GoogleVisionSafeSearch($newImage),
-    new GoogleVisionLabelImage($newImage),
-    new RemoveFaces($newImage),
-])->dispatch($newImage->path, 300, 300);
+                GoogleVisionSafeSearch::withChain([
+                    new GoogleVisionLabelImage($newImage),
+                    new RemoveFaces($newImage),
+                    new ResizeImage($newImage->path, 300, 300),
+                ])->dispatch($newImage);
             }
 
             File::deleteDirectory(

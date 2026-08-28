@@ -21,7 +21,7 @@
                                 <img
                                     src="{{ asset('storage/' . $image->path) }}"
                                     class="img-fluid rounded shadow"
-                                    style="height:250px; width:100%; object-fit:cover;"
+                                    style="width:100%; max-height:500px; object-fit:contain;"
                                     alt="{{ $article_to_check->title }}">
 
                                 @if($image->labels)
