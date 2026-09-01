@@ -47,15 +47,24 @@ class GoogleVisionSafeSearch implements ShouldQueue
         $googleImage = new VisionImage();
         $googleImage->setContent(file_get_contents($imagePath));
 
-        $googleFeature = new Feature();
-        $googleFeature->setType(
+        $safeSearchFeature = new Feature();
+        $safeSearchFeature->setType(
             Feature\Type::SAFE_SEARCH_DETECTION
+        );
+
+        $labelFeature = new Feature();
+        $labelFeature->setType(
+            Feature\Type::LABEL_DETECTION
         );
 
         $request = new AnnotateImageRequest();
 
         $request->setImage($googleImage);
-        $request->setFeatures([$googleFeature]);
+
+        $request->setFeatures([
+            $safeSearchFeature,
+            $labelFeature
+        ]);
 
         $batchRequest = new BatchAnnotateImagesRequest();
 
@@ -73,20 +82,28 @@ class GoogleVisionSafeSearch implements ShouldQueue
         }
 
         $safe = $responses[0]->getSafeSearchAnnotation();
-        
 
-        if (!$safe) {
-            $googleVisionClient->close();
-            return;
+        if ($safe) {
+            $image->adult = $safe->getAdult();
+            $image->spoof = $safe->getSpoof();
+            $image->racy = $safe->getRacy();
+            $image->medical = $safe->getMedical();
+            $image->violence = $safe->getViolence();
         }
 
-       $image->adult = $safe->getAdult();
-$image->spoof = $safe->getSpoof();
-$image->racy = $safe->getRacy();
-$image->medical = $safe->getMedical();
-$image->violence = $safe->getViolence();
+        $labels = $responses[0]->getLabelAnnotations();
 
-$image->save();
+        if ($labels) {
+            $result = [];
+
+            foreach ($labels as $label) {
+                $result[] = $label->getDescription();
+            }
+
+            $image->labels = $result;
+        }
+
+        $image->save();
 
         $googleVisionClient->close();
     }
