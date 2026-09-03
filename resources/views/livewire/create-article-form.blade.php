@@ -1,133 +1,210 @@
 <form wire:submit="store" class="col-md-8 mx-auto">
 
     @if(session('success'))
-        <div class="alert alert-success">
+
+        <div
+            class="alert rounded-3"
+            style="
+                background-color: #1A1A1A;
+                color: #D4AF37;
+                border: 1px solid #D4AF37;
+            ">
+
             {{ session('success') }}
+
         </div>
+
     @endif
 
-    {{-- Titolo --}}
     <div class="mb-3">
 
-        <label class="form-label">
+        <label
+            class="form-label fw-bold"
+            style="color: #F8F8F8;">
+
             {{ __('messages.title') }}
+
         </label>
 
         <input
             wire:model="title"
             type="text"
-            class="form-control">
+            class="form-control"
+            style="
+                background-color: #111111;
+                color: #F8F8F8;
+                border: 1px solid #333333;
+            ">
 
         @error('title')
-            <small class="text-danger">{{ $message }}</small>
+
+            <small class="text-danger">
+                {{ $message }}
+            </small>
+
         @enderror
 
     </div>
 
-    {{-- Descrizione --}}
     <div class="mb-3">
 
-        <label class="form-label">
+        <label
+            class="form-label fw-bold"
+            style="color: #F8F8F8;">
+
             {{ __('messages.description') }}
+
         </label>
 
         <textarea
             wire:model="description"
             rows="5"
-            class="form-control"></textarea>
+            class="form-control"
+            style="
+                background-color: #111111;
+                color: #F8F8F8;
+                border: 1px solid #333333;
+            "></textarea>
 
         @error('description')
-            <small class="text-danger">{{ $message }}</small>
+
+            <small class="text-danger">
+                {{ $message }}
+            </small>
+
         @enderror
 
     </div>
 
-    {{-- Prezzo --}}
     <div class="mb-3">
 
-        <label class="form-label">
+        <label
+            class="form-label fw-bold"
+            style="color: #F8F8F8;">
+
             {{ __('messages.price') }}
+
         </label>
 
         <input
             wire:model="price"
             type="number"
             step="0.01"
-            class="form-control">
+            class="form-control"
+            style="
+                background-color: #111111;
+                color: #F8F8F8;
+                border: 1px solid #333333;
+            ">
 
         @error('price')
-            <small class="text-danger">{{ $message }}</small>
+
+            <small class="text-danger">
+                {{ $message }}
+            </small>
+
         @enderror
 
     </div>
 
-    {{-- Categoria --}}
     <div class="mb-4">
 
-        <label class="form-label">
+        <label
+            class="form-label fw-bold"
+            style="color: #F8F8F8;">
+
             {{ __('messages.category') }}
+
         </label>
 
         <select
             wire:model="category_id"
-            class="form-select">
+            class="form-select"
+            style="
+                background-color: #111111;
+                color: #F8F8F8;
+                border: 1px solid #333333;
+            ">
 
             <option value="">
+
                 {{ __('messages.select_category') }}
+
             </option>
 
-           @foreach($categories as $category)
+            @foreach($categories as $category)
 
-    <option value="{{ $category->id }}">
-        {{ __('messages.'.$category->name) }}
-    </option>
+                <option value="{{ $category->id }}">
 
-@endforeach
+                    {{ __('messages.'.$category->name) }}
+
+                </option>
+
+            @endforeach
 
         </select>
 
         @error('category_id')
-            <small class="text-danger">{{ $message }}</small>
+
+            <small class="text-danger">
+                {{ $message }}
+            </small>
+
         @enderror
 
     </div>
 
-   {{-- Upload immagini --}}
-<div class="mb-4">
+    <div class="mb-4">
 
-    <label class="form-label fw-bold">
-        {{ __('messages.images') }}
-    </label>
+        <label
+            class="form-label fw-bold"
+            style="color: #F8F8F8;">
 
-    <input
-        id="images"
-        type="file"
-        wire:model.live="temporary_images"
-        multiple
-        hidden>
+            {{ __('messages.images') }}
 
-    <label
-        for="images"
-        class="btn btn-outline-primary w-100">
+        </label>
 
-        {{ __('messages.choose_images') }}
+        <input
+            id="images"
+            type="file"
+            wire:model.live="temporary_images"
+            multiple
+            hidden>
 
-    </label>
+        <label
+            for="images"
+            class="btn w-100 fw-bold"
+            style="
+                color: #D4AF37;
+                border: 1px solid #D4AF37;
+                background-color: transparent;
+            ">
 
-    <small class="text-muted d-block mt-2">
-        {{ count($images) }}
-        {{ __('messages.selected_images') }}
-    </small>
+            {{ __('messages.choose_images') }}
 
-    @error('temporary_images.*')
-        <small class="text-danger">
-            {{ $message }}
+        </label>
+
+        <small
+            class="d-block mt-2"
+            style="color: #B8B8B8;">
+
+            {{ count($images) }}
+            {{ __('messages.selected_images') }}
+
         </small>
-    @enderror
 
-</div>
+        @error('temporary_images.*')
 
-    {{-- Anteprima --}}
+            <small class="text-danger">
+
+                {{ $message }}
+
+            </small>
+
+        @enderror
+
+    </div>
+
     @if(count($images))
 
         <div class="row mb-4">
@@ -136,12 +213,20 @@
 
                 <div class="col-md-3 mb-3">
 
-                    <div class="card shadow-sm">
+                    <div
+                        class="card h-100"
+                        style="
+                            background-color: #111111;
+                            border: 1px solid #D4AF37;
+                        ">
 
                         <img
                             src="{{ $image->temporaryUrl() }}"
                             class="card-img-top"
-                            style="height:200px; object-fit:cover;">
+                            style="
+                                height: 200px;
+                                object-fit: cover;
+                            ">
 
                         <div class="card-body text-center">
 
@@ -168,7 +253,12 @@
 
     <button
         type="submit"
-        class="btn btn-primary w-100">
+        class="btn w-100 fw-bold"
+        style="
+            background-color: #D4AF37;
+            color: #111111;
+            border: none;
+        ">
 
         {{ __('messages.new_article') }}
 

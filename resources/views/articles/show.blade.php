@@ -2,26 +2,43 @@
 
     <div class="container py-5">
 
-        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+        <div
+            class="rounded-4 overflow-hidden shadow-lg"
+            style="
+                background-color: #1A1A1A;
+                border: 1px solid #D4AF37;
+            ">
 
-            <div class="card-body p-4 p-md-5">
+            <div class="p-4 p-md-5">
 
-                {{-- TITOLO --}}
+                <h1
+                    class="fw-bold mb-4"
+                    style="color: #F8F8F8;">
 
-                <h1 class="fw-bold mb-4">
                     {{ $article->title }}
+
                 </h1>
 
+                <div
+                    class="mb-4"
+                    style="
+                        width: 80px;
+                        height: 3px;
+                        background-color: #D4AF37;
+                    ">
+                </div>
 
-                {{-- IMMAGINI --}}
 
                 @if($article->images->count())
 
-                    <div id="carouselExample"
-                         class="carousel slide mb-5"
-                         data-bs-ride="carousel">
+                    <div
+                        id="carouselExample"
+                        class="carousel slide mb-5"
+                        data-bs-ride="carousel">
 
-                        <div class="carousel-inner rounded-4 overflow-hidden shadow-sm">
+                        <div
+                            class="carousel-inner rounded-4 overflow-hidden shadow-sm"
+                            style="border: 1px solid #333333;">
 
                             @foreach($article->images as $key => $image)
 
@@ -39,7 +56,6 @@
 
                         </div>
 
-
                         @if($article->images->count() > 1)
 
                             <button
@@ -55,7 +71,6 @@
                                 </span>
 
                             </button>
-
 
                             <button
                                 class="carousel-control-next"
@@ -82,7 +97,11 @@
                         <img
                             src="https://picsum.photos/1200/500"
                             class="img-fluid rounded-4 shadow-sm w-100"
-                            style="height:500px; object-fit:cover;"
+                            style="
+                                height:500px;
+                                object-fit:cover;
+                                border: 1px solid #333333;
+                            "
                             alt="Placeholder">
 
                     </div>
@@ -90,18 +109,24 @@
                 @endif
 
 
-                {{-- INFORMAZIONI ANNUNCIO --}}
-
                 <div class="row g-4">
 
                     <div class="col-lg-8">
 
-                        <h4 class="fw-bold mb-3">
+                        <h4
+                            class="fw-bold mb-3"
+                            style="color: #D4AF37;">
+
                             {{ __('messages.description') }}
+
                         </h4>
 
-                        <p class="fs-5 text-muted">
+                        <p
+                            class="fs-5"
+                            style="color: #B8B8B8;">
+
                             {{ $article->description }}
+
                         </p>
 
                     </div>
@@ -109,28 +134,41 @@
 
                     <div class="col-lg-4">
 
-                        <div class="card border-0 shadow-sm rounded-4">
+                        <div
+                            class="rounded-4 h-100"
+                            style="
+                                background-color: #111111;
+                                border: 1px solid #D4AF37;
+                            ">
 
-                            <div class="card-body p-4">
+                            <div class="p-4">
 
-                                <h3 class="text-success fw-bold mb-4">
+                                <h3
+                                    class="fw-bold mb-4"
+                                    style="color: #D4AF37;">
 
                                     € {{ number_format($article->price, 2, ',', '.') }}
 
                                 </h3>
 
+                                <hr style="border-color: #333333;">
 
-                                <div class="mb-3">
+                                <div
+                                    class="mb-3"
+                                    style="color: #B8B8B8;">
 
-                                    <strong>
+                                    <strong style="color: #F8F8F8;">
+
                                         {{ __('messages.category') }}:
+
                                     </strong>
 
                                     <br>
 
                                     <a
                                         href="{{ route('articles.byCategory', $article->category) }}"
-                                        class="text-decoration-none">
+                                        class="text-decoration-none fw-bold"
+                                        style="color: #D4AF37;">
 
                                         {{ __('messages.'.$article->category->name) }}
 
@@ -138,11 +176,14 @@
 
                                 </div>
 
+                                <div
+                                    class="mb-3"
+                                    style="color: #B8B8B8;">
 
-                                <div class="mb-3">
+                                    <strong style="color: #F8F8F8;">
 
-                                    <strong>
                                         {{ __('messages.author') }}:
+
                                     </strong>
 
                                     <br>
@@ -151,11 +192,12 @@
 
                                 </div>
 
+                                <div style="color: #B8B8B8;">
 
-                                <div>
+                                    <strong style="color: #F8F8F8;">
 
-                                    <strong>
                                         Data:
+
                                     </strong>
 
                                     <br>
@@ -173,13 +215,16 @@
                 </div>
 
 
-                {{-- TORNA AGLI ANNUNCI --}}
-
                 <div class="mt-5">
 
                     <a
                         href="{{ route('articles.index') }}"
-                        class="btn btn-secondary rounded-pill px-4">
+                        class="btn rounded-pill px-4 fw-bold"
+                        style="
+                            background-color: #D4AF37;
+                            color: #111111;
+                            border: none;
+                        ">
 
                         ← {{ __('messages.back_to_ads') }}
 

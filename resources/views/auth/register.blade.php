@@ -1,69 +1,162 @@
 <x-layout :title="__('messages.register')">
 
-    <div class="container py-5">
+    <div class="container">
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
 
-            <div class="col-md-6">
+            <div class="col-md-7 col-lg-5">
 
-                <h2 class="text-center mb-4">
+                <div
+                    class="rounded-4 shadow-lg p-4 p-md-5"
+                    style="
+                        background-color: #1A1A1A;
+                        border: 1px solid #D4AF37;
+                    ">
 
-                    {{ __('messages.register') }}
+                    <div class="text-center mb-4">
 
-                </h2>
+                        <span
+                            class="text-uppercase fw-bold"
+                            style="
+                                color: #D4AF37;
+                                letter-spacing: 3px;
+                            ">
 
-                <form method="POST" action="{{ route('register') }}">
+                            PRESTO MARKETPLACE
 
-                    @csrf
+                        </span>
 
-                    <div class="mb-3">
+                        <h2
+                            class="fw-bold mt-3"
+                            style="color: #F8F8F8;">
 
-                        <input
-                            name="name"
-                            class="form-control"
-                            placeholder="{{ __('messages.name') }}"
-                            value="{{ old('name') }}">
+                            {{ __('messages.register') }}
 
-                    </div>
+                        </h2>
 
-                    <div class="mb-3">
-
-                        <input
-                            name="email"
-                            type="email"
-                            class="form-control"
-                            placeholder="{{ __('messages.email') }}"
-                            value="{{ old('email') }}">
-
-                    </div>
-
-                    <div class="mb-3">
-
-                        <input
-                            name="password"
-                            type="password"
-                            class="form-control"
-                            placeholder="{{ __('messages.password') }}">
+                        <div
+                            class="mx-auto mt-3"
+                            style="
+                                width: 60px;
+                                height: 3px;
+                                background-color: #D4AF37;
+                            ">
+                        </div>
 
                     </div>
 
-                    <div class="mb-4">
+                    <form method="POST" action="{{ route('register') }}">
 
-                        <input
-                            name="password_confirmation"
-                            type="password"
-                            class="form-control"
-                            placeholder="{{ __('messages.confirm_password') }}">
+                        @csrf
 
-                    </div>
+                        <div class="mb-3">
 
-                    <button class="btn btn-success w-100">
+                            <label
+                                class="form-label fw-bold"
+                                style="color: #F8F8F8;">
 
-                        {{ __('messages.register') }}
+                                {{ __('messages.name') }}
 
-                    </button>
+                            </label>
 
-                </form>
+                            <input
+                                name="name"
+                                class="form-control"
+                                value="{{ old('name') }}"
+                                required
+                                style="
+                                    background-color: #111111;
+                                    color: #F8F8F8;
+                                    border: 1px solid #333333;
+                                ">
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label fw-bold"
+                                style="color: #F8F8F8;">
+
+                                {{ __('messages.email') }}
+
+                            </label>
+
+                            <input
+                                name="email"
+                                type="email"
+                                class="form-control"
+                                value="{{ old('email') }}"
+                                required
+                                style="
+                                    background-color: #111111;
+                                    color: #F8F8F8;
+                                    border: 1px solid #333333;
+                                ">
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label
+                                class="form-label fw-bold"
+                                style="color: #F8F8F8;">
+
+                                {{ __('messages.password') }}
+
+                            </label>
+
+                            <input
+                                name="password"
+                                type="password"
+                                class="form-control"
+                                required
+                                style="
+                                    background-color: #111111;
+                                    color: #F8F8F8;
+                                    border: 1px solid #333333;
+                                ">
+
+                        </div>
+
+                        <div class="mb-4">
+
+                            <label
+                                class="form-label fw-bold"
+                                style="color: #F8F8F8;">
+
+                                {{ __('messages.confirm_password') }}
+
+                            </label>
+
+                            <input
+                                name="password_confirmation"
+                                type="password"
+                                class="form-control"
+                                required
+                                style="
+                                    background-color: #111111;
+                                    color: #F8F8F8;
+                                    border: 1px solid #333333;
+                                ">
+
+                        </div>
+
+                        <button
+                            class="btn w-100 fw-bold"
+                            style="
+                                background-color: #D4AF37;
+                                color: #111111;
+                                border: none;
+                            ">
+
+                            {{ __('messages.register') }}
+
+                        </button>
+
+                    </form>
+
+                </div>
 
             </div>
 

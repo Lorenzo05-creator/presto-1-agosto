@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ $title ?? 'Presto' }}</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
+
+    @vite([
+        'resources/css/app.css',
+        'resources/js/app.js'
+    ])
 </head>
-<body>
 
-<x-navbar />
+<body
+    style="
+        background-color: #111111;
+        color: #F8F8F8;
+    ">
 
-<main class="min-vh-100 py-4">
-    {{ $slot }}
-</main>
+    <x-navbar />
 
-<x-footer />
+    <main class="min-vh-100 py-4">
+        {{ $slot }}
+    </main>
+
+    <x-footer />
 
 </body>
 </html>
